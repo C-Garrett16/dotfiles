@@ -1,0 +1,15 @@
+format = """
+$directory$git_branch$git_status$nodejs$rust$python
+$character
+"""
+
+[directory]
+style = "bold blue"
+
+[git_branch]
+symbol = "🌱 "
+style = "green"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
