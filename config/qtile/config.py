@@ -39,7 +39,7 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle layouts"),
-    Key([mod, "shift"], "s", lazy.spawn("flameshot"), desc="Flameshot - Screenshot utility"),
+    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc="Flameshot - Screenshot utility"),
     Key([mod, "shift"], "e", lazy.spawn(editor), desc="Doom Emacs"),
 ]
 
