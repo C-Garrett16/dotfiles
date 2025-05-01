@@ -31,3 +31,6 @@ alias lt='eza --tree --level=2'
 
 # Prompt
 eval "$(starship init zsh)"
+
+# Mount Google Drive
+rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes &

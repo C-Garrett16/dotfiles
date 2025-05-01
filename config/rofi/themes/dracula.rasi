@@ -1,0 +1,46 @@
+configuration {
+    font: "JetBrainsMono Nerd Font 13";
+    show-icons: true;
+    display-drun: "Run:";
+}
+
+* {
+    background: #282a36;
+    background-alt: #44475a;
+    foreground: #f8f8f2;
+    selected-background: #bd93f9;
+    selected-foreground: #282a36;
+    urgent-background: #ff5555;
+    urgent-foreground: #f8f8f2;
+    active-background: #50fa7b;
+    active-foreground: #282a36;
+    border-color: #bd93f9;
+}
+
+window {
+    background-color: @background;
+    border: 2px;
+    padding: 20px;
+}
+
+listview {
+    background-color: @background;
+    lines: 8;
+    spacing: 5;
+}
+
+element {
+    background-color: @background;
+    foreground-color: @foreground;
+}
+
+element selected {
+    background-color: @selected-background;
+    foreground-color: @selected-foreground;
+}
+
+textbox {
+    background-color: @background;
+    foreground-color: @foreground;
+}
+

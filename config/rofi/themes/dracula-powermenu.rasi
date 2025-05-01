@@ -1,0 +1,49 @@
+* {
+    background: #282a36;
+    background-alt: #44475a;
+    foreground: #f8f8f2;
+    selected-background: #bd93f9;
+    selected-foreground: #282a36;
+    border: 2px;
+    border-color: #bd93f9;
+    font: "JetBrainsMono Nerd Font 18";
+    spacing: 10;
+}
+
+window {
+    background-color: @background;
+    border: @border;
+    border-color: @border-color;
+    padding: 40px;
+    location: center;
+    width: 20%;
+}
+
+mainbox {
+    background-color: @background;
+    padding: 20px;
+    spacing: 15px;
+}
+
+listview {
+    background-color: @background;
+    columns: 1;
+    lines: 5;
+}
+
+element {
+    background-color: @background;
+    foreground-color: @foreground;
+    padding: 10px;
+}
+
+element selected {
+    background-color: @selected-background;
+    foreground-color: @selected-foreground;
+}
+
+textbox {
+    background-color: @background;
+    foreground-color: @foreground;
+    padding: 10px;
+}
