@@ -11,6 +11,7 @@ import subprocess
 mod = "mod4"
 terminal = "alacritty"
 rofi_launcher = "rofi -show drun -theme dracula"
+editor = "emacsclient -c -a 'vim'"
 
 keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
@@ -38,6 +39,8 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle layouts"),
+    Key([mod, "shift"], "s", lazy.spawn("flameshot"), desc="Flameshot - Screenshot utility"),
+    Key([mod, "shift"], "e", lazy.spawn(editor), desc="Doom Emacs"),
 ]
 
 # Define workspaces

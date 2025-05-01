@@ -1,3 +1,5 @@
+# Doom Emacs
+export PATH="$HOME/.config/emacs/bin:$PATH"
 
 # >>> Zinit load section >>>
 
@@ -33,4 +35,4 @@ alias lt='eza --tree --level=2'
 eval "$(starship init zsh)"
 
 # Mount Google Drive
-rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes &
+rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes
