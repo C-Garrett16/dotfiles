@@ -13,7 +13,7 @@ error_handler() {
 
 trap 'error_handler $LINENO' ERR
 
-DOTFILES=~/Projects/dotfiles
+DOTFILES=~/dotfiles
 CONFIG=$HOME/.config
 
 # Detect the system's package manager and set appropriate commands
@@ -46,7 +46,7 @@ link_dotfile() {
 
 # Update package list and install essential tools
 $UPDATE
-$INSTALL zsh git unzip wget curl starship alacritty eza bat fzf ripgrep btop fuse3 flatpak
+$INSTALL zsh git unzip wget curl starship alacritty eza bat fzf ripgrep btop fuse3 flatpak emacs
 
 # Link Starship config
 link_dotfile "$DOTFILES/config/starship.toml" "$CONFIG/starship.toml"
