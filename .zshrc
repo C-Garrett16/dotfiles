@@ -30,9 +30,18 @@ bindkey '^[[B' history-substring-search-down
 alias ls='eza -la --icons --color=always --group-directories-first'
 alias lt='eza --tree --level=2'
 
+acp () {
+  if [ -z "$1" ]; then
+    echo "⚠️  Commit message required"
+    return 1
+  fi
+  git add .
+  git commit -m "$1"
+  git push
+}
 
 # Prompt
 eval "$(starship init zsh)"
 
 # Mount Google Drive
-rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes
+#rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes
