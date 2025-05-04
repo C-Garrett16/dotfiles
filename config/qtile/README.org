@@ -1,13 +1,46 @@
+#+title: Qtile Config
+#+PROPERTY: header-args:python :tangle config.py
+
+* Table Of Contents :toc:
+- [[#qtile-config][Qtile Config]]
+- [[#imports][Imports]]
+- [[#variables][Variables]]
+- [[#keybindings][Keybindings]]
+- [[#screen-layouts--widgets][Screen Layouts & Widgets]]
+- [[#various-layout-rules][Various Layout Rules]]
+- [[#hooks-and-startup-behavior][Hooks and Startup Behavior]]
+
+* Qtile Config
+
+* Imports
+These are the imports for the script. It allows python to pull functions from these libraries to use them later in the code.
+
+#+begin_src python
+
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Key, Group, Screen, Match
 from libqtile.lazy import lazy
 import os
 import subprocess
 
+#+end_src
+
+* Variables
+These are the variables used within the document.
+
+#+begin_src python
+
 mod = "mod4"
 terminal = "alacritty"
 rofi_launcher = "rofi -show drun -theme dracula"
 editor = "emacsclient -c -a 'vim'"
+
+#+end_src
+
+* Keybindings
+Various keybindings. Self explanatory.
+
+#+begin_src python
 
 keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
@@ -50,6 +83,13 @@ for i in groups:
         # Move window to workspace
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name), desc=f"Move window to group {i.name}"),
     ])
+
+#+end_src
+
+* Screen Layouts & Widgets
+This defines various layout options as well as top bar configuration.
+
+#+begin_src python
 
 layouts = [
     layout.Columns(border_focus="#bd93f9", margin=8),
@@ -115,12 +155,26 @@ def init_screens():
 
 screens = init_screens()
 
+#+end_src
+
+* Various Layout Rules
+This block defines various rules to specific applications.
+
+#+begin_src python
+
 floating_layout = layout.Floating(
     float_rules=[
         *layout.Floating.default_float_rules,
         Match(wm_class="Conky"),
     ]
 )
+
+#+end_src
+
+* Hooks and Startup Behavior
+This defines various rules to run on various events.
+
+#+begin_src python
 
 @hook.subscribe.client_new
 def disable_conky_borders(window):
@@ -162,3 +216,4 @@ focus_on_window_activation = "smart"
 reconfigure_screens = True
 wl_input_rules = None
 wmname = "LG3D"
+#+end_src
