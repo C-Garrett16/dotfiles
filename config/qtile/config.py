@@ -126,6 +126,23 @@ floating_layout = layout.Floating(
     ]
 )
 
+@hook.subscribe.client_new
+def disable_conky_borders(window):
+    if window.match(wm_class="Conky"):
+        window.togroup(qtile.groups[0].name)
+        window.floating = True
+        window.border_width = 0
+        window.disable_floating()
+
+@hook.subscribe.client_new
+def ignore_conky(window):
+    if window.window.get_wm_class() == ('Conky', 'Conky'):
+        window.togroup(qtile.groups[0].name)
+        window.floating = True
+        window.border_width = 0
+        window.disable_floating()
+        window.set_property("QTILE_INTERNAL_NO_FOCUS", "1")
+
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
