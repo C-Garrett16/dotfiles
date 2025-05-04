@@ -40,6 +40,11 @@ acp () {
   git push
 }
 
+restdoom () {
+  killall emacs
+  emacs --daemon
+}
+
 # Prompt
 eval "$(starship init zsh)"
 
