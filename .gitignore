@@ -3,3 +3,4 @@
 .cache/
 .history
 zinit/
+/config/qtile/config.py
