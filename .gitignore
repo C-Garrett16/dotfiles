@@ -16,3 +16,4 @@ zinit/
 
 # Emacs tokens
 .emacs.d/.cache/org-gcal/*
+/config/doom/config.el
