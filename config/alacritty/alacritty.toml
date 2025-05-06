@@ -42,9 +42,8 @@ white = "#ffffff"
 [selection]
 save_to_clipboard = true
 
-[terminal]
 
-[terminal.shell]
+[shell]
 program = "/usr/bin/zsh"
 args = ["--login"]
 
