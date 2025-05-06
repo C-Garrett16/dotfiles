@@ -4,3 +4,15 @@
 .history
 zinit/
 /config/qtile/config.py
+# Auth stuff
+.authinfo
+.authinfo.gpg
+.mailpass.gpg
+.client_secret.json
+*.plstore
+*.pem
+*.key
+*.gpg
+
+# Emacs tokens
+.emacs.d/.cache/org-gcal/*
