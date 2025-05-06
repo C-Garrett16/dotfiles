@@ -43,6 +43,7 @@ acp () {
 restdoom () {
   killall emacs
   emacs --daemon
+  emacsclient -c -a 'vim' &
 }
 
 # Prompt

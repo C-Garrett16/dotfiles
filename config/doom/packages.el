@@ -50,3 +50,6 @@
 
 
 (package! tldr)
+(package! org-gcal
+  :recipe (:host github :repo "emacsmirror/org-gcal"))
+(package! oauth2)
