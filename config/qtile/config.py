@@ -52,7 +52,12 @@ for i in groups:
     ])
 
 layouts = [
-    layout.Columns(border_focus="#bd93f9", margin=8),
+    layout.MonadTall(
+        margin=10,
+        border_focus="#bd93f9",
+        border_width=2,
+    ),
+    layout.Columns(border_focus="#bd93f9", margin=4),
     layout.Max(),
 ]
 
@@ -63,53 +68,47 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+def my_bar(primary=False):
+    widgets = [
+        widget.GroupBox(
+            highlight_method="block",
+            rounded=False,
+            active="#f8f8f2",
+            inactive="#6272a4",
+            highlight_color=["#282a36", "#44475a"],
+            this_current_screen_border="#bd93f9",
+            other_current_screen_border="#50fa7b",
+        ),
+        widget.Prompt(),
+        widget.WindowName(),
+    ]
+
+    if primary:
+        widgets.extend([
+            widget.Memory(format='Mem: {MemUsed: .0f}M', foreground="#ff79c6"),
+            widget.CPU(format='CPU: {load_percent}%', foreground="#50fa7b"),
+            widget.DF(partition='/', format='Disk: {uf} free', foreground="#8be9fd"),
+            widget.Systray(),
+        ])
+
+    widgets.append(widget.Clock(format='%a %b %d, %I:%M %p', foreground="#f1fa8c"))
+
+    return bar.Bar(
+        widgets,
+        38,  # << chonky bar height
+        margin=[15, 20, 5, 20],  # << floating look
+        border_width=2,
+        border_color="#44475a",
+        background="#282a36",
+    )
+
 def init_screens():
     return [
         Screen(
-            top=bar.Bar(
-                [
-                    widget.GroupBox(
-                        highlight_method="block",
-                        rounded=False,
-                        active="#f8f8f2",
-                        inactive="#6272a4",
-                        highlight_color=["#282a36", "#44475a"],
-                        this_current_screen_border="#bd93f9",
-                        other_current_screen_border="#50fa7b",
-                    ),
-                    widget.Prompt(),
-                    widget.WindowName(),
-                    widget.Memory(format='Mem: {MemUsed: .0f}M', foreground="#ff79c6"),
-                    widget.CPU(format='CPU: {load_percent}%', foreground="#50fa7b"),
-                    widget.DF(partition='/', format='Disk: {uf} free', foreground="#8be9fd"),
-                    widget.Systray(),
-                    widget.Clock(format='%a %b %d, %I:%M %p', foreground="#f1fa8c"),
-                ],
-                26,
-                background="#282a36",
-                margin=[4, 4, 4, 4],
-            ),
+            top=my_bar(primary=True),
         ),
         Screen(
-            top=bar.Bar(
-                [
-                    widget.GroupBox(
-                        highlight_method="block",
-                        rounded=False,
-                        active="#f8f8f2",
-                        inactive="#6272a4",
-                        highlight_color=["#282a36", "#44475a"],
-                        this_current_screen_border="#bd93f9",
-                        other_current_screen_border="#50fa7b",
-                    ),
-                    widget.Prompt(),
-                    widget.WindowName(),
-                    widget.Clock(format='%a %b %d, %I:%M %p', foreground="#f1fa8c"),
-                ],
-                26,
-                background="#282a36",
-                margin=[4, 4, 4, 4],
-            ),
+            top=my_bar(primary=False),
         ),
     ]
 
