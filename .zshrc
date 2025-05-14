@@ -1,6 +1,8 @@
 # Doom Emacs
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
+# Pip
+export PATH="$HOME.local/bin:$PATH"
 # >>> Zinit load section >>>
 
 # Load Zinit
@@ -50,3 +52,6 @@ eval "$(starship init zsh)"
 
 # Mount Google Drive
 #rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes
+
+# Created by `pipx` on 2025-05-09 14:21:08
+export PATH="$PATH:/home/cgreid/.local/bin"
