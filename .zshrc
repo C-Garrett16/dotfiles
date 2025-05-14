@@ -45,6 +45,10 @@ acp () {
 restdoom () {
   killall emacs
   emacs --daemon
+<<<<<<< HEAD
+=======
+  emacsclient -c -a 'vim' &
+>>>>>>> 7bacd4988f4770994f4b388e7e618bab38d6ecf2
 }
 
 # Prompt
@@ -52,6 +56,9 @@ eval "$(starship init zsh)"
 
 # Mount Google Drive
 #rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes
+<<<<<<< HEAD
 
 # Created by `pipx` on 2025-05-09 14:21:08
 export PATH="$PATH:/home/cgreid/.local/bin"
+=======
+>>>>>>> 7bacd4988f4770994f4b388e7e618bab38d6ecf2

@@ -43,7 +43,12 @@ white = "#ffffff"
 save_to_clipboard = true
 
 
+<<<<<<< HEAD
 [shell]
+=======
+
+[terminal.shell]
+>>>>>>> 7bacd4988f4770994f4b388e7e618bab38d6ecf2
 program = "/usr/bin/zsh"
 args = ["--login"]
 

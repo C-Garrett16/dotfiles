@@ -4,3 +4,19 @@
 .history
 zinit/
 /config/qtile/config.py
+<<<<<<< HEAD
+=======
+# Auth stuff
+.authinfo
+.authinfo.gpg
+.mailpass.gpg
+.client_secret.json
+*.plstore
+*.pem
+*.key
+*.gpg
+
+# Emacs tokens
+.emacs.d/.cache/org-gcal/*
+config/doom/config.el
+>>>>>>> 7bacd4988f4770994f4b388e7e618bab38d6ecf2
