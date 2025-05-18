@@ -13,7 +13,9 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch Terminal"),
-    Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun -theme ~/.config/rofi/themes/dracula.rasi"), desc="Launch Rofi Menu"),
+    Key([mod, "shift"], "Return", lazy.spawn("/home/cgreid/Projects/dotfiles/config/qtile/scripts/dracula_dmenu.sh"), desc="Launch dmenu"),
+    Key([mod, "shift"], "w", lazy.spawn("firefox"), desc="Launch Web Browser"),
+    Key([mod], "e", lazy.spawn("thunar"), desc="Launch File Manager"),
     Key([mod], "Escape", lazy.spawn("/home/cgreid/.config/rofi/powermenu.sh"), desc="Power menu"),
     Key(
     [mod], "q",

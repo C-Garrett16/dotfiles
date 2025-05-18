@@ -20,3 +20,5 @@ zinit/
 .emacs.d/.cache/org-gcal/*
 config/doom/config.el
 >>>>>>> 7bacd4988f4770994f4b388e7e618bab38d6ecf2
+__pycache__/
+*.pyc

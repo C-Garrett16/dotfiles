@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# GTK Theming
+export GTK_THEME=Dracula
+export GTK_ICON_THEME=Papirus-Dark
+export QT_QPA_PLATFORMTHEME=gtk2
 
 ~/.screenlayout/default.sh
 

@@ -1,0 +1,26 @@
+configuration {
+    show-icons: false;
+    display-run: "";
+    font: "JetBrainsMono Nerd Font Mono 13";
+    location: 1;
+    anchor: north west;
+    fullscreen: false;
+    width: 30;
+    lines: 1;
+    fixed-num-lines: true;
+    prompt: "";
+    auto-select: true;
+    x-offset: 15;
+    y-offset: 10;
+}
+
+* {
+    background:      #282a36;
+    foreground:      #f8f8f2;
+    border-color:    #bd93f9;
+    selected-background: #bd93f9;
+    selected-foreground: #282a36;
+    border: 0px;
+    padding: 5px 10px;
+    margin: 0px;
+}
