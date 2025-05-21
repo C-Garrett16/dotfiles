@@ -28,23 +28,44 @@ if command -v pacman &>/dev/null; then
     PKG_MANAGER="pacman"
     INSTALL="sudo pacman -S --noconfirm"
     UPDATE="sudo pacman -Syu"
-    PACKAGES=(firefox emacs zsh unzip wget curl alacritty eza bat fzf ripgrep btop flatpak fonts-noto-color-emoji fonts-noto fonts-powerline)
+    PACKAGE_FILE="packages.arch"
 elif command -v apt &>/dev/null; then
     PKG_MANAGER="apt"
     INSTALL="sudo apt install -y"
     UPDATE="sudo apt update && sudo apt upgrade -y"
-    PACKAGES=(firefox emacs zsh unzip wget curl alacritty eza bat fzf ripgrep btop flatpak)
+    PACKAGE_FILE="packages.debian"
 else
     echo "[!] Unsupported distro. Install manually."
     exit 1
 fi
 
+if [[ ! -f $PACKAGE_FILE ]]; then
+    echo "Package list file $PACKAGE_FILE not found!"
+    exit 1
+fi
+
+# This creates an array out of the contents of $PACKAGE_FILE and stores it into the PACKAGES Var.
+mapfile -t PACKAGES < "$PACKAGE_FILE"
+
 # Update system and install packages
 eval $UPDATE
 $INSTALL "${PACKAGES[@]}"
 
+# Install YAY if not already.
+if ! command -v yay &>/dev/null; then
+    echo 'Installing yay AUR helper'
+    cd /tmp
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si --noconfirm
+fi
+
+# Install JetBrainsMono Nerd Font (Arch)
+if [[ "$PKG_MANAGER" == "pacman" ]]; then
+   echo "Installing JetBrainsMono Nerd Font..."
+   yay -S ttf-jetbrains-mono-nerd
 # Install JetBrainsMono Nerd Font (Ubuntu)
-if [[ "$PKG_MANAGER" == "apt" ]]; then
+elif [[ "$PKG_MANAGER" == "apt" ]]; then
     echo "[*] Installing JetBrainsMono Nerd Font..."
     mkdir -p ~/.local/share/fonts
     cd ~/.local/share/fonts
@@ -56,6 +77,9 @@ if [[ "$PKG_MANAGER" == "apt" ]]; then
 
     echo "[*] Installing starship manually..."
     curl -sS https://starship.rs/install.sh | sh -s -- -y
+else
+    echo "unsupported OS detected. Exiting"
+    exit 1
 fi
 
 # Set up rclone remote if missing
@@ -141,6 +165,12 @@ if [[ "$SYNC_DOOM" == true ]] && command -v "$HOME/.config/emacs/bin/doom" &>/de
     "$HOME/.config/emacs/bin/doom" sync
     echo "[*] Doom Emacs synced successfully."
 fi
+
+#Enable important things.
+sudo systemctl enable NetworkManager
+sudo systemctl start NetworkManager
+sudo systemctl enable lightdm
+sudo systemctl start lightdm
 
 echo "[✓] Dotfiles installed. Doom synced. Restart your shell or run 'exec zsh' to enjoy."
 
