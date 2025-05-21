@@ -22,7 +22,7 @@ trap 'error_handler $LINENO' ERR
 
 #read -p "Enter your desired username: " USERNAME
 #read -p "Enter computer name: " HOSTNAME
-DOTFILES=~/Projects/dotfiles
+DOTFILES=$HOME/Projects/dotfiles
 CONFIG=$HOME/.config
 
 #Check if Projects folder exists, if it doesn't create it.
