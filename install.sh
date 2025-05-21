@@ -28,12 +28,12 @@ if command -v pacman &>/dev/null; then
     PKG_MANAGER="pacman"
     INSTALL="sudo pacman -S --noconfirm"
     UPDATE="sudo pacman -Syu"
-    PACKAGES=(emacs zsh git unzip wget curl alacritty eza bat fzf ripgrep btop flatpak fonts-noto-color-emoji fonts-noto fonts-powerline)
+    PACKAGES=(firefox emacs zsh unzip wget curl alacritty eza bat fzf ripgrep btop flatpak fonts-noto-color-emoji fonts-noto fonts-powerline)
 elif command -v apt &>/dev/null; then
     PKG_MANAGER="apt"
     INSTALL="sudo apt install -y"
     UPDATE="sudo apt update && sudo apt upgrade -y"
-    PACKAGES=(emacs zsh git unzip wget curl alacritty eza bat fzf ripgrep btop flatpak)
+    PACKAGES=(firefox emacs zsh unzip wget curl alacritty eza bat fzf ripgrep btop flatpak)
 else
     echo "[!] Unsupported distro. Install manually."
     exit 1
@@ -59,18 +59,18 @@ if [[ "$PKG_MANAGER" == "apt" ]]; then
 fi
 
 # Set up rclone remote if missing
-if ! rclone listremotes | grep -q "^gdrive:"; then
-    echo "[*] Configuring rclone remote 'gdrive'..."
-    rclone config create gdrive drive scope drive.file token "" config_is_local false
-    echo "[!] A browser window may open for Google authorization."
-fi
+#if ! rclone listremotes | grep -q "^gdrive:"; then
+#    echo "[*] Configuring rclone remote 'gdrive'..."
+#    rclone config create gdrive drive scope drive.file token "" config_is_local false
+#    echo "[!] A browser window may open for Google authorization."
+#fi
 
 # Mount Google Drive
-mkdir -p ~/GoogleDrive
-if ! mount | grep -q "~/GoogleDrive"; then
-    echo "[*] Mounting gdrive to ~/GoogleDrive..."
-    rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes &
-fi
+# mkdir -p ~/GoogleDrive
+#if ! mount | grep -q "~/GoogleDrive"; then
+#    echo "[*] Mounting gdrive to ~/GoogleDrive..."
+#    rclone mount gdrive: ~/GoogleDrive --vfs-cache-mode writes &
+#fi
 
 # Link dotfiles
 link_dotfile() {
@@ -90,6 +90,9 @@ link_dotfile "$DOTFILES/config/starship.toml" "$CONFIG/starship.toml"
 link_dotfile "$DOTFILES/config/alacritty" "$CONFIG/alacritty"
 link_dotfile "$DOTFILES/.zshrc" "$HOME/.zshrc"
 link_dotfile "$DOTFILES/config/doom" "$CONFIG/doom"
+link_dotfile "$DOTFILES/config/qtile" "$config/qtile"
+link_dotfile "$DOTFILES/config/conky" "$config/conky"
+link_dotfile "$DOTFILES/config/picom" "$config/picom"
 
 # Ensure PATH and Starship prompt are configured in .zshrc
 if ! grep -q 'emacs/bin' "$HOME/.zshrc"; then
