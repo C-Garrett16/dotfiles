@@ -31,7 +31,7 @@ if [[ ! -d "$DOTFILES" ]]; then
     mkdir -p "$DOTFILES"
     chown "$USER" "$DOTFILES"
     chmod 755 "$DOTFILES"
-    cp -r $PWD/dotfiles "$DOTFILES"
+    cp -r * "$DOTFILES"
     echo "Dotfiles directory created successfully."
 fi
 
