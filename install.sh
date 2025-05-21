@@ -128,9 +128,9 @@ link_dotfile "$DOTFILES/config/starship.toml" "$CONFIG/starship.toml"
 link_dotfile "$DOTFILES/config/alacritty" "$CONFIG/alacritty"
 link_dotfile "$DOTFILES/.zshrc" "$HOME/.zshrc"
 link_dotfile "$DOTFILES/config/doom" "$CONFIG/doom"
-link_dotfile "$DOTFILES/config/qtile" "$config/qtile"
-link_dotfile "$DOTFILES/config/conky" "$config/conky"
-link_dotfile "$DOTFILES/config/picom" "$config/picom"
+link_dotfile "$DOTFILES/config/qtile" "$CONFIG/qtile"
+link_dotfile "$DOTFILES/config/conky" "$CONFIG/conky"
+link_dotfile "$DOTFILES/config/picom" "$CONFIG/picom"
 
 # Ensure PATH and Starship prompt are configured in .zshrc
 if ! grep -q 'emacs/bin' "$HOME/.zshrc"; then
