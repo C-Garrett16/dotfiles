@@ -20,8 +20,20 @@ error_handler() {
 
 trap 'error_handler $LINENO' ERR
 
+#read -p "Enter your desired username: " USERNAME
+#read -p "Enter computer name: " HOSTNAME
 DOTFILES=~/Projects/dotfiles
 CONFIG=$HOME/.config
+
+#Check if Projects folder exists, if it doesn't create it.
+if [[ ! -d "$DOTFILES" ]]; then
+    echo "Creating Projects folder and setting permissions."
+    mkdir -p "$DOTFILES"
+    chown "$USER" "$DOTFILES"
+    chmod 755 "$DOTFILES"
+    cp -r $PWD/dotfiles "$DOTFILES"
+    echo "Dotfiles directory created successfully."
+fi
 
 # Detect distro and set package manager
 if command -v pacman &>/dev/null; then
@@ -109,6 +121,8 @@ link_dotfile() {
     echo "[*] Linking $dest -> $src"
     ln -sf "$src" "$dest"
 }
+
+
 
 link_dotfile "$DOTFILES/config/starship.toml" "$CONFIG/starship.toml"
 link_dotfile "$DOTFILES/config/alacritty" "$CONFIG/alacritty"
