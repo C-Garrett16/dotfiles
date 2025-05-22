@@ -20,10 +20,48 @@ error_handler() {
 
 trap 'error_handler $LINENO' ERR
 
+
+echo "==> Detecting and installing GPU drivers..."
+install_display_drivers() {
+    if lspci | grep -qi nvidia; then
+        echo "Detected NVIDIA GPU. Installing NVIDIA drivers..."
+        pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
+        sed -i 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="nvidia-drm.modeset=1 /' /etc/default/grub
+        grub-mkconfig -o /boot/grub/grub.cfg
+    elif lspci | grep -qi amd; then
+        echo "Detected AMD GPU. Installing AMD drivers..."
+        pacman -S --noconfirm xf86-video-amdgpu mesa
+    elif lspci | grep -qi intel; then
+        echo "Detected Intel GPU. Installing Intel drivers..."
+        pacman -S --noconfirm xf86-video-intel mesa
+    else
+        echo "No known GPU detected. Installing fallback VESA driver..."
+        pacman -S --noconfirm xf86-video-vesa
+    fi
+}
+
+echo "==> Fixing LightDM config..."
+fix_lightdm_config() {
+    local LIGHTDM_CONF="/etc/lightdm/lightdm.conf"
+
+    if [[ -f "$LIGHTDM_CONF" ]]; then
+        # Ensure greeter-session is set to lightdm-gtk-greeter
+        sed -i 's/^#\?\s*greeter-session=.*/greeter-session=lightdm-gtk-greeter/' "$LIGHTDM_CONF"
+
+        # Add it under [Seat:*] if it's not already there
+        if ! grep -q '^greeter-session=lightdm-gtk-greeter' "$LIGHTDM_CONF"; then
+            sed -i '/^\[Seat:\*\]/a greeter-session=lightdm-gtk-greeter' "$LIGHTDM_CONF"
+        fi
+    fi
+}
+
+
+
 #read -p "Enter your desired username: " USERNAME
 #read -p "Enter computer name: " HOSTNAME
 DOTFILES=$HOME/Projects/dotfiles
 CONFIG=$HOME/.config
+LIGHTDM_CONF ="/etc/lightdm/lightdm.conf"
 
 #Check if Projects folder exists, if it doesn't create it.
 if [[ ! -d "$DOTFILES" ]]; then
@@ -93,6 +131,11 @@ else
     echo "unsupported OS detected. Exiting"
     exit 1
 fi
+
+install_display_drivers
+
+fix_lightdm_config
+
 
 # Set up rclone remote if missing
 #if ! rclone listremotes | grep -q "^gdrive:"; then
@@ -185,6 +228,9 @@ sudo systemctl enable NetworkManager
 sudo systemctl start NetworkManager
 sudo systemctl enable lightdm
 sudo systemctl start lightdm
+
+echo "exec qtile start" > $HOME/.xsession
+echo "exec qtile start" > $HOME/.xinitrc
 
 echo "[✓] Dotfiles installed. Doom synced. Restart your shell or run 'exec zsh' to enjoy."
 

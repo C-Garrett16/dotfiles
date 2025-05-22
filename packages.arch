@@ -21,3 +21,9 @@ picom
 nitrogen
 starship
 lightdm
+qtile
+lightdm-gtk-greeter
+nvidia
+ttf-dejavu
+ttf-liberation
+ttf-font-awesome
