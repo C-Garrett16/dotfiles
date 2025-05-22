@@ -147,7 +147,7 @@ fi
 if [ ! -d "$HOME/.config/emacs" ]; then
     echo "[*] Installing Doom Emacs..."
     git clone --depth 1 https://github.com/doomemacs/doomemacs "$HOME/.config/emacs"
-    "$HOME/.config/emacs/bin/doom" install --config "$CONFIG/doom"
+    "$HOME/.config/emacs/bin/doom" install
 
     mkdir -p ~/.config/autostart
     cat <<EOF > ~/.config/autostart/emacs-server.desktop
