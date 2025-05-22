@@ -12,7 +12,7 @@ export QT_QPA_PLATFORMTHEME=gtk2
 picom --config ~/.config/picom/picom.conf &
 nitrogen --restore &
 nm-applet &
-conky &
+conky -c $HOME/Projects/dotfiles/config/conky/dracula_conky.conf &
 flameshot &
 
 # Mount fileserver

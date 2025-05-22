@@ -25,18 +25,18 @@ echo "==> Detecting and installing GPU drivers..."
 install_display_drivers() {
     if lspci | grep -qi nvidia; then
         echo "Detected NVIDIA GPU. Installing NVIDIA drivers..."
-        pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
-        sed -i 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="nvidia-drm.modeset=1 /' /etc/default/grub
-        grub-mkconfig -o /boot/grub/grub.cfg
+        sudo pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
+        sudo sed -i 's/GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="nvidia-drm.modeset=1 /' /etc/default/grub
+        sudo grub-mkconfig -o /boot/grub/grub.cfg
     elif lspci | grep -qi amd; then
         echo "Detected AMD GPU. Installing AMD drivers..."
-        pacman -S --noconfirm xf86-video-amdgpu mesa
+        sudo pacman -S --noconfirm xf86-video-amdgpu mesa
     elif lspci | grep -qi intel; then
         echo "Detected Intel GPU. Installing Intel drivers..."
-        pacman -S --noconfirm xf86-video-intel mesa
+        sudo pacman -S --noconfirm xf86-video-intel mesa
     else
         echo "No known GPU detected. Installing fallback VESA driver..."
-        pacman -S --noconfirm xf86-video-vesa
+        sudo pacman -S --noconfirm xf86-video-vesa
     fi
 }
 
@@ -46,11 +46,11 @@ fix_lightdm_config() {
 
     if [[ -f "$LIGHTDM_CONF" ]]; then
         # Ensure greeter-session is set to lightdm-gtk-greeter
-        sed -i 's/^#\?\s*greeter-session=.*/greeter-session=lightdm-gtk-greeter/' "$LIGHTDM_CONF"
+        sudo sed -i 's/^#\?\s*greeter-session=.*/greeter-session=lightdm-gtk-greeter/' "$LIGHTDM_CONF"
 
         # Add it under [Seat:*] if it's not already there
         if ! grep -q '^greeter-session=lightdm-gtk-greeter' "$LIGHTDM_CONF"; then
-            sed -i '/^\[Seat:\*\]/a greeter-session=lightdm-gtk-greeter' "$LIGHTDM_CONF"
+            sudo sed -i '/^\[Seat:\*\]/a greeter-session=lightdm-gtk-greeter' "$LIGHTDM_CONF"
         fi
     fi
 }
@@ -61,7 +61,7 @@ fix_lightdm_config() {
 #read -p "Enter computer name: " HOSTNAME
 DOTFILES=$HOME/Projects/dotfiles
 CONFIG=$HOME/.config
-LIGHTDM_CONF ="/etc/lightdm/lightdm.conf"
+LIGHTDM_CONF="/etc/lightdm/lightdm.conf"
 
 #Check if Projects folder exists, if it doesn't create it.
 if [[ ! -d "$DOTFILES" ]]; then
