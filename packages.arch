@@ -14,9 +14,6 @@ bat
 fzf
 ripgrep
 btop
-fonts-noto-color-emoji
-fonts-noto
-fonts-powerline
 xorg
 xorg-xinit
 conky
