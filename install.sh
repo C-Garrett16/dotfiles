@@ -224,7 +224,7 @@ echo "Cloning DT's wallpaper pack"
 git clone https://gitlab.com/dwt1/wallpapers.git ~/Pictures/Wallpapers
 
 echo "Cloning and building dmenu..."
-git clone https://gitlab.com/C-Garrett16/dmenu.git ~/Projects/dmenu
+git clone https://github.com/C-Garrett16/dmenu.git ~/Projects/dmenu
 cd $HOME/Projects/dmenu
 sudo make clean install
 
