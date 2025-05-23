@@ -226,11 +226,14 @@ fi
 #Enable important things.
 sudo systemctl enable NetworkManager
 sudo systemctl start NetworkManager
-sudo systemctl enable lightdm
-sudo systemctl start lightdm
 
 echo "exec qtile start" > $HOME/.xsession
 echo "exec qtile start" > $HOME/.xinitrc
 
-echo "[✓] Dotfiles installed. Doom synced. Restart your shell or run 'exec zsh' to enjoy."
 
+echo "[✓] Dotfiles installed. Doom synced. Restart your shell or run 'exec zsh' to enjoy."
+sleep 3
+echo "[*] Skipping LightDM auto-start to allow testing first"
+sleep 3
+echo "[*] To start LightDM manually, run: sudo systemctl start lightdm"
+sleep 3

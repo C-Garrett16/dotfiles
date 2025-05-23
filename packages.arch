@@ -25,4 +25,5 @@ qtile
 lightdm-gtk-greeter
 ttf-dejavu
 ttf-liberation
+ttf-ubuntu-font-family
 ttf-font-awesome
