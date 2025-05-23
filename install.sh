@@ -66,11 +66,8 @@ LIGHTDM_CONF="/etc/lightdm/lightdm.conf"
 #Check if Projects folder exists, if it doesn't create it.
 if [[ ! -d "$DOTFILES" ]]; then
     echo "Creating Projects folder and setting permissions."
-    mkdir -p "$DOTFILES"
-    chown "$USER" "$DOTFILES"
-    chmod 755 "$DOTFILES"
-    cp -r * "$DOTFILES"
-    echo "Dotfiles directory created successfully."
+    git clone https://github.com/C-Garrett16/dotfiles.git ~/Projects/dotfiles
+    echo "Dotfiles successfully cloned to $DOTFILES"
 fi
 
 # Detect distro and set package manager
@@ -176,15 +173,15 @@ link_dotfile "$DOTFILES/config/conky" "$CONFIG/conky"
 link_dotfile "$DOTFILES/config/picom" "$CONFIG/picom"
 
 # Ensure PATH and Starship prompt are configured in .zshrc
-if ! grep -q 'emacs/bin' "$HOME/.zshrc"; then
-    echo 'export PATH="$HOME/.config/emacs/bin:$PATH"' >> "$HOME/.zshrc"
-    echo "[*] Added Doom Emacs to PATH in .zshrc"
-fi
+#if ! grep -q 'emacs/bin' "$HOME/.zshrc"; then
+#    echo 'export PATH="$HOME/.config/emacs/bin:$PATH"' >> "$HOME/.zshrc"
+#    echo "[*] Added Doom Emacs to PATH in .zshrc"
+#fi
 
-if ! grep -q 'eval "\$(starship init zsh)"' "$HOME/.zshrc"; then
-    echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
-    echo "[*] Added Starship prompt initialization to .zshrc"
-fi
+#if ! grep -q 'eval "\$(starship init zsh)"' "$HOME/.zshrc"; then
+#    echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
+#    echo "[*] Added Starship prompt initialization to .zshrc"
+#fi
 
 # Install Doom Emacs
 if [ ! -d "$HOME/.config/emacs" ]; then
@@ -222,6 +219,9 @@ if [[ "$SYNC_DOOM" == true ]] && command -v "$HOME/.config/emacs/bin/doom" &>/de
     "$HOME/.config/emacs/bin/doom" sync
     echo "[*] Doom Emacs synced successfully."
 fi
+
+echo "Cloning DT's wallpaper pack"
+git clone https://gitlab.com/dwt1/wallpapers.git ~/Pictures/Wallpapers
 
 #Enable important things.
 sudo systemctl enable NetworkManager
