@@ -1,6 +1,7 @@
 # [[file:../../../Projects/dotfiles/config/qtile/README.org::*Host: Home][Host: Home:1]]
 from libqtile import hook, layout
-from libqtile.config import Group, Screen, Match
+from libqtile.config import Group, Screen, Match, Key
+from libqtile.lazy import lazy
 from core.keys import keys
 from core.layouts import layouts
 from core.widgets import my_bar
