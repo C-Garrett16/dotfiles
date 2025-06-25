@@ -31,6 +31,8 @@ bindkey '^[[B' history-substring-search-down
 # User Aliases
 alias ls='eza -la --icons --color=always --group-directories-first'
 alias lt='eza --tree --level=2'
+alias needreboot='[[ "$(uname -r)" != "$(pacman -Q linux | awk "{print \$2}" | cut -d. -f1-2)" ]] && echo "Kernel mismatch: reboot recommended." || echo "No reboot needed."'
+alias clean-cache='sudo paccache -r'
 
 acp () {
   if [ -z "$1" ]; then
