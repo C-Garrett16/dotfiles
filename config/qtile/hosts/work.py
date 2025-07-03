@@ -22,16 +22,17 @@ for group in groups:
     ])
 
 screens = [
-    Screen(top=my_bar(['4', '5', '6'], primary=True)),
     Screen(top=my_bar(['7', '8', '9'])),
+    Screen(top=my_bar(['4', '5', '6'], primary=True)),
     Screen(top=my_bar(['1', '2', '3'])),
 ]
 
 floating_layout = layout.Floating(float_rules=[*layout.Floating.default_float_rules, Match(wm_class="Conky")])
 
-@hook.subscribe.startup_once
-def autostart():
+@hook.subscribe.startup_complete
+def startup_complete_hook():
     subprocess.call([os.path.expanduser('~/.config/qtile/autostart.sh')])
+    print("Moving groups on startup")
     qtile.groups_map['1'].cmd_toscreen(0)
     qtile.groups_map['4'].cmd_toscreen(1)
     qtile.groups_map['7'].cmd_toscreen(2)
