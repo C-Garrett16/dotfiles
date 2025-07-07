@@ -10,6 +10,7 @@ editor = "emacsclient -c -a 'vim'"
 keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "shift"], "Return", lazy.spawn("/home/cgreid/.local/bin/dmenu_launch.sh"), desc="Launch dmenu"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch Terminal"),
     Key([mod, "shift"], "w", lazy.spawn("firefox"), desc="Launch Web Browser"),
     Key([mod], "e", lazy.spawn("thunar"), desc="Launch File Manager"),

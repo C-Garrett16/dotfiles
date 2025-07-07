@@ -38,6 +38,7 @@ editor = "emacsclient -c -a 'vim'"
 keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "shift"], "Return", lazy.spawn("/home/cgreid/.local/bin/dmenu_launch.sh"), desc="Launch dmenu"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch Terminal"),
     Key([mod, "shift"], "w", lazy.spawn("firefox"), desc="Launch Web Browser"),
     Key([mod], "e", lazy.spawn("thunar"), desc="Launch File Manager"),
@@ -190,3 +191,21 @@ def autostart():
     qtile.groups_map['1'].cmd_toscreen(0)
     qtile.groups_map['4'].cmd_toscreen(1)
 #+END_SRC
+
+** Scripts
+:PROPERTIES:
+:header-args: :tangle ~/.local/bin/dmenu_launch.sh :shebang "#!/bin/bash"
+:END:
+#+begin_src bash
+dmenu_run \
+    -i \
+    -fn "monospace-14" \
+    -nb "#282a36" \
+    -nf "#f8f8f2" \
+    -sb "#bd93f9" \
+    -sf "#282a36" \
+    -x 20 \
+    -y 15 \
+    -z 1880 \
+    -h 50
+#+end_src
