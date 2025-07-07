@@ -192,7 +192,7 @@ def autostart():
     qtile.groups_map['4'].cmd_toscreen(1)
 #+END_SRC
 
-** Scripts
+** Dmenu Script
 :PROPERTIES:
 :header-args: :tangle ~/.local/bin/dmenu_launch.sh :shebang "#!/bin/bash"
 :END:
