@@ -14,6 +14,7 @@ nitrogen --restore &
 nm-applet &
 conky -c $HOME/Projects/dotfiles/config/conky/dracula_conky.conf &
 flameshot &
+udiskie &
 
 # Mount fileserver
 
